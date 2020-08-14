@@ -1,0 +1,63 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8" />
+    <title> Crossword Printer </title>
+    <meta name="description" content="Prints crossword" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 3px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" align="center">
+            <h1> Crossword : {{month}}</h1>
+            <br /><br />
+            <table cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="400">
+				{% for row in crossword %}
+                    <tr>
+					{% for col in row %}
+						{% if col == -1 %}
+							<td height="40" width="40" bgcolor="#000000">&nbsp;</td>		
+						{% elif col == 0 %}
+							<td height="40" width="40">&nbsp;</td>
+						{% else %}
+							<td height="40" width="40">{{col}}</td>
+						{% endif %}
+					{% endfor %}
+                    </tr>	
+				{% endfor %}
+            </table>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div id="crossword-clue" class="row">
+        <br/> <br/>
+        <div class="col-md-3"></div>
+        <div class="col-md-3" >
+            <h2 align="center"><b>આડી ચાવી</b></h2>
+			{% for key in horizontal_keys %}
+				<h3> [{{ key["order"]}}] {{key["clue"]}} ({{key["length"]}}) </h3>
+			{% endfor %}
+        </div>
+        <div class="col-md-3" >
+            <h2 align="center"><b>ઉભી ચાવી</b></h2>
+            {% for key in vertical_keys %}
+				<h3> [{{ key["order"]}}] {{key["clue"]}} ({{key["length"]}}) </h3>
+			{% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</body>
+</html>
